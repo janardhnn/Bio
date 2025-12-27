@@ -26,14 +26,17 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
+          cache: 'npm'   # requires package-lock.json
+
+      - name: Show versions (debug)
+        run: |
+          node -v
+          npm -v
 
       - name: Install dependencies
-        working-directory: ./src/
-        run: npm
+        run: npm ci
 
       - name: Build
-        working-directory: ./src/
         env:
           REPO_OWNER: ${{ github.repository_owner }}
           REPO_NAME: ${{ github.event.repository.name }}
